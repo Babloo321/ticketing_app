@@ -89,6 +89,15 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true
   }
+},{
+  toJSON:{
+    transform(doc, ret){
+      ret.id = ret._id;
+      delete ret._id;
+      delete ret.password;
+      delete ret.__v;
+    }
+  }
 });
 // after creating hash password class have to use this functionality into the mongoose
 // mongoose provide some functionality like pre, isModified, get, set so many
